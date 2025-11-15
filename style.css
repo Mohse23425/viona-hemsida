@@ -103,3 +103,38 @@ body {
  pointer-events:none;transition:.2s;
 }
 .glow-follow:hover::after{width:140px;height:140px;}
+/* Soft fade-in */
+body.loaded .video-frame,
+body.loaded .profile {
+    opacity: 1;
+    transition: opacity 0.8s ease-out;
+}
+
+.video-frame,
+.profile {
+    opacity: 0;
+}
+
+/* Tap-to-start overlay */
+.tap-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0,0,0,0.45);
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    backdrop-filter: blur(5px);
+    cursor: pointer;
+}
+
+/* Softer glow effect */
+.btn {
+    transition: 0.25s ease;
+}
+
+.btn:hover {
+    box-shadow: 0 0 18px rgba(255, 70, 130, 0.4);
+}
