@@ -14,17 +14,16 @@
         <div class="video-card">
             <div class="video-frame">
                 <video 
-                    id="bgVideo" 
-                    autoplay 
-                    loop 
-                    muted 
-                    playsinline 
-                    webkit-playsinline 
-                    preload="auto" 
+                    id="bgVideo"
+                    autoplay
+                    loop
+                    muted
+                    playsinline
+                    webkit-playsinline
+                    preload="auto"
                     style="display:block; width:100%;"
                 >
                     <source src="Hemsida_klipp_baseline_ready.mp4" type="video/mp4">
-                    <!-- webm kan finnas kvar som fallback men lämna kommenterad om den ställde till problem -->
                     <!-- <source src="Hemsida_klipp.webm" type="video/webm"> -->
                 </video>
             </div>
@@ -42,7 +41,7 @@
         </div>
     </div>
 
-    <!-- Autoplay + fallback (ENKEL och STABIL) -->
+    <!-- Stabil autoplay för mobil -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const v = document.getElementById("bgVideo");
@@ -51,11 +50,7 @@
             v.muted = true;
             v.playsInline = true;
 
-            // Försök spela direkt
-            v.play().then(() => {
-                // startade — allt ok
-            }).catch(() => {
-                // Misslyckades: spela vid första user-gesture (engångs)
+            v.play().catch(() => {
                 const oneTouch = () => {
                     v.play().catch(()=>{});
                     window.removeEventListener('touchstart', oneTouch);
