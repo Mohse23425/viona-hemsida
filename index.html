@@ -32,30 +32,14 @@
         </div>
     </div>
 
-    <!-- Autoplay fix -->
+    <!-- Minimal autoplay init -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const v = document.getElementById("bgVideo");
             if (!v) return;
 
             v.muted = true;
-
-            const tryPlay = () => {
-                const p = v.play();
-                if (p && p.catch) p.catch(() => {});
-            };
-
-            tryPlay();
-
-            const unlock = () => {
-                v.muted = true;
-                tryPlay();
-                window.removeEventListener("touchstart", unlock);
-                window.removeEventListener("click", unlock);
-            };
-
-            window.addEventListener("touchstart", unlock, { passive: true });
-            window.addEventListener("click", unlock, { passive: true });
+            v.play().catch(() => {});
         });
     </script>
 
