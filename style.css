@@ -3,6 +3,15 @@ body {
     background: radial-gradient(circle at center, #240000 0%, #070000 70%);
     color: white;
     font-family: Helvetica Neue, sans-serif;
+
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+
+body.page-loaded {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .container {
@@ -20,22 +29,14 @@ body {
     margin-bottom: 25px;
 }
 
-.video-frame {
-    width: 100%;
-}
-
 .video-frame video {
     width: 100%;
-    height: auto;
-    display: block;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(255,0,0,0.35);
 }
 
-/* CONTENT */
-.profile {
-    text-align: center;
-}
+/* TEXT */
+.profile { text-align: center; }
 
 .title {
     font-size: 42px;
@@ -51,10 +52,8 @@ body {
     font-size: 18px;
 }
 
-/* Flame */
-.flame {
-    animation: flame 2s infinite alternate;
-}
+/* Flame effect */
+.flame { animation: flame 2s infinite alternate; }
 @keyframes flame {
     0% { text-shadow: 0 0 8px red; }
     100% { text-shadow: 0 0 20px #ff1a1a; }
@@ -73,7 +72,7 @@ body {
     font-weight: 600;
     border-radius: 14px;
     box-shadow: 0 0 22px rgba(255,0,0,0.6);
-    transition: 0.2s ease;
+    transition: 0.25s ease;
 }
 
 .btn:hover {
@@ -81,71 +80,40 @@ body {
     box-shadow: 0 0 32px rgba(255,0,0,1);
 }
 
-/* PARALLAX BG */
-.bg-parallax{
- position:fixed;top:0;left:0;width:100%;height:100%;
- background:radial-gradient(circle at center,#1a0000 0%,#060000 80%);
- z-index:-2;
- animation:par 18s infinite alternate ease;
-}
-@keyframes par{0%{background-position:center;}100%{background-position:60% 40%;}}
-
-/* pulse */
-.pulse{animation:pulseVid 6s infinite alternate;}
-@keyframes pulseVid{0%{filter:brightness(1);}100%{filter:brightness(1.06);}}
-
-/* mouse-follow glow */
-.glow-follow{position:relative;overflow:hidden;}
-.glow-follow::after{
- content:'';position:absolute;top:var(--y);left:var(--x);
- width:0;height:0;transform:translate(-50%,-50%);
- background:rgba(255,80,80,0.35);border-radius:50%;
- pointer-events:none;transition:.2s;
-}
-.glow-follow:hover::after{width:140px;height:140px;}
-/* Soft fade-in */
-body.loaded .video-frame,
-body.loaded .profile {
-    opacity: 1;
-    transition: opacity 0.8s ease-out;
-}
-
-.video-frame,
-.profile {
-    opacity: 0;
-}
-
-/* Tap-to-start overlay */
-.tap-overlay {
+/* Glow-follow mouse effect */
+.glow-follow { position: relative; overflow: hidden; }
+.glow-follow::after {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: var(--y);
+    left: var(--x);
+    width: 0;
+    height: 0;
     transform: translate(-50%, -50%);
-    background: rgba(0,0,0,0.45);
-    padding: 12px 20px;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 16px;
-    backdrop-filter: blur(5px);
-    cursor: pointer;
+    background: rgba(255,80,80,0.35);
+    border-radius: 50%;
+    pointer-events: none;
+    transition: .2s;
+}
+.glow-follow:hover::after { width: 140px; height: 140px; }
+
+/* Parallax background */
+.bg-parallax {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at center,#1a0000 0%,#060000 80%);
+    z-index:-2;
+    animation: par 18s infinite alternate ease;
+}
+@keyframes par { 
+    0% { background-position: center; }
+    100% { background-position: 60% 40%; }
 }
 
-/* Softer glow effect */
-.btn {
-    transition: 0.25s ease;
-}
-
-.btn:hover {
-    box-shadow: 0 0 18px rgba(255, 70, 130, 0.4);
-}
-/* PAGE FADE-IN */
-body {
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-body.page-loaded {
-    opacity: 1;
-    transform: translateY(0);
+/* Video pulse */
+.pulse { animation: pulseVid 6s infinite alternate; }
+@keyframes pulseVid {
+    0% { filter: brightness(1); }
+    100% { filter: brightness(1.06); }
 }
