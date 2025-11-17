@@ -7,35 +7,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<script>
-(function(){
-  const v = document.getElementById('bgVideo');
-  if(!v) return;
-
-  // Säkerställ muted + playsinline
-  v.muted = true;
-  v.setAttribute('playsinline', '');
-  v.setAttribute('webkit-playsinline', '');
-
-  // Försök spela direkt
-  const tryPlay = () => {
-    const p = v.play();
-    if(p && p.catch) p.catch(()=>{});
-  };
-  document.addEventListener('DOMContentLoaded', tryPlay);
-
-  // Om autoplay blockeras: spela vid första touch (en enkel user-gesture)
-  const onUserGesture = () => {
-    v.muted = true;
-    tryPlay();
-    window.removeEventListener('touchstart', onUserGesture);
-    window.removeEventListener('click', onUserGesture);
-  };
-  window.addEventListener('touchstart', onUserGesture, {passive:true});
-  window.addEventListener('click', onUserGesture, {passive:true});
-})();
-</script>
-
 <body>
     <div class="bg-parallax"></div>
 
