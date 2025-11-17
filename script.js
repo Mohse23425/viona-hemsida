@@ -1,11 +1,10 @@
 console.log("Viona glow active");
 
-// Fade-in animation när sidan laddat
 window.addEventListener("load", () => {
     document.body.classList.add("page-loaded");
 });
 
-// Glow-effekt på knapparna
+// Glow-effekt
 document.querySelectorAll(".glow-follow").forEach(btn => {
     btn.addEventListener("mousemove", e => {
         const r = btn.getBoundingClientRect();
@@ -14,23 +13,32 @@ document.querySelectorAll(".glow-follow").forEach(btn => {
     });
 });
 
-// Autoplay + fallback
+// Autoplay fix för iPhone
 document.addEventListener("DOMContentLoaded", () => {
     const vid = document.querySelector("video");
     if (!vid) return;
 
     vid.muted = true;
 
+    let attempts = 0;
+
     const tryPlay = () => {
-        vid.play().catch(() => {
-            console.log("Autoplay blockerat, väntar på user interaction...");
+        vid.play().then(() => {
+            console.log("🎉 Video autoplay fungerar!");
+        }).catch(() => {
+            attempts++;
+            console.log("Autoplay blockerat (försök " + attempts + ")");
+
+            // Prova igen automatiskt
+            if (attempts < 10) {
+                setTimeout(tryPlay, 600);
+            }
         });
     };
 
-    // Försök direkt
-    tryPlay();
+    tryPlay(); // kör direkt
 
-    // Fallback: starta så fort man klickar eller scrollar
+    // Starta så fort användaren klickar eller scrollar
     const unlock = () => {
         tryPlay();
         window.removeEventListener("click", unlock);
