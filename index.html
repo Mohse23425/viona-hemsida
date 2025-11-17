@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-
-<style>
-  body { opacity: 0; }
-</style>
-
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Viona – Hemliga Världen</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body { opacity: 0; transition: opacity .7s ease; }
+    body.page-loaded { opacity: 1; }
+  </style>
 </head>
 
 <body>
-  <div class='bg-parallax'></div>
+  <div class="bg-parallax"></div>
 
   <div class="container">
 
@@ -39,6 +38,12 @@
 
   </div>
 
+  <script>
+    // Page fade-in
+    window.addEventListener("load", () => {
+      document.body.classList.add("page-loaded");
+    });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
