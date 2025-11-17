@@ -11,3 +11,12 @@ document.querySelectorAll(".glow-follow").forEach(btn => {
         btn.style.setProperty("--y", `${e.clientY - r.top}px`);
     });
 });
+document.addEventListener("DOMContentLoaded", () => {
+  const vid = document.querySelector("video");
+  if (vid) {
+    vid.muted = true;
+    vid.play().catch(() => {
+      console.log("Autoplay blockerat, försöker igen...");
+    });
+  }
+});
