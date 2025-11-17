@@ -32,6 +32,35 @@
         </div>
     </div>
 
+    <!-- Autoplay fix -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const v = document.getElementById("bgVideo");
+            if (!v) return;
+
+            v.muted = true;
+
+            // Försök spela direkt
+            const tryPlay = () => {
+                const p = v.play();
+                if (p && p.catch) p.catch(() => {});
+            };
+
+            tryPlay();
+
+            // Ifall Safari blockar autoplay → spela vid första rörelse/touch
+            const unlock = () => {
+                v.muted = true;
+                tryPlay();
+                window.removeEventListener("touchstart", unlock);
+                window.removeEventListener("click", unlock);
+            };
+
+            window.addEventListener("touchstart", unlock, { passive: true });
+            window.addEventListener("click", unlock, { passive: true });
+        });
+    </script>
+
     <script src="script.js"></script>
 </body>
 </html>
