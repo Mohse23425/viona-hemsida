@@ -131,3 +131,11 @@ body.page-loaded {
     0% { background-position: center; }
     100% { background-position: 60% 40%; }
 }
+
+/* Ta bort iPhone play-knappen */
+video::-webkit-media-controls {
+    display: none !important;
+}
+video::-webkit-media-controls-start-playback-button {
+    display: none !important;
+}
