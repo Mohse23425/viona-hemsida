@@ -1,3 +1,33 @@
+/* ===== iPhone fullscreen fix ===== */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #000;
+}
+
+/* Tvinga iPhone att slopa vita kanter */
+:root {
+    padding: 0;
+    margin: 0;
+    background-color: #000;
+    height: 100%;
+    width: 100%;
+    min-height: -webkit-fill-available;
+}
+
+body {
+    min-height: -webkit-fill-available;
+}
+
+/* Ta bort iOS browser safe areas */
+@supports(padding: env(safe-area-inset-top)) {
+    body {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
 /* =========================
    GLOBAL
 ========================= */
