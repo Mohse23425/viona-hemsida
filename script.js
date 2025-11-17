@@ -14,13 +14,29 @@ document.querySelectorAll(".glow-follow").forEach(btn => {
     });
 });
 
-// Säkerställer autoplay på video
+// Autoplay + fallback
 document.addEventListener("DOMContentLoaded", () => {
-  const vid = document.querySelector("video");
-  if (vid) {
+    const vid = document.querySelector("video");
+    if (!vid) return;
+
     vid.muted = true;
-    vid.play().catch(() => {
-      console.log("Autoplay blockerat, försöker igen...");
-    });
-  }
+
+    const tryPlay = () => {
+        vid.play().catch(() => {
+            console.log("Autoplay blockerat, väntar på user interaction...");
+        });
+    };
+
+    // Försök direkt
+    tryPlay();
+
+    // Fallback: starta så fort man klickar eller scrollar
+    const unlock = () => {
+        tryPlay();
+        window.removeEventListener("click", unlock);
+        window.removeEventListener("scroll", unlock);
+    };
+
+    window.addEventListener("click", unlock);
+    window.addEventListener("scroll", unlock);
 });
