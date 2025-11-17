@@ -40,7 +40,7 @@
         </div>
     </div>
 
-    <!-- MAX-FORCE AUTOPLAY FÖR MOBIL -->
+    <!-- MAX-FORCE AUTOPLAY FÖR MOBIL (OPTIMERAD) -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const v = document.getElementById("bgVideo");
@@ -49,24 +49,23 @@
             v.muted = true;
             v.playsInline = true;
 
-            const forcePlay = () => v.play().catch(()=>{});
+            const forcePlay = () => v.play().catch(() => {});
 
-            // Direkt autoplay + flera försök
-            forcePlay();
+            // iPhone gillar lugna intervaller
+            setTimeout(forcePlay, 50);
             setTimeout(forcePlay, 300);
             setTimeout(forcePlay, 800);
             setTimeout(forcePlay, 1500);
 
-            // Om iPhone ändå blockar – trigga efter första touch
-            v.play().catch(() => {
-                const oneTouch = () => {
-                    forcePlay();
-                    window.removeEventListener('touchstart', oneTouch);
-                    window.removeEventListener('click', oneTouch);
-                };
-                window.addEventListener('touchstart', oneTouch, { once: true, passive: true });
-                window.addEventListener('click', oneTouch, { once: true });
-            });
+            // Fallback: första touch
+            const unlock = () => {
+                forcePlay();
+                window.removeEventListener("touchstart", unlock);
+                window.removeEventListener("click", unlock);
+            };
+
+            window.addEventListener("touchstart", unlock, { once: true, passive: true });
+            window.addEventListener("click", unlock, { once: true });
         });
     </script>
 
