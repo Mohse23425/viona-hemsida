@@ -1,12 +1,11 @@
+/* =========================
+   GLOBAL
+========================= */
 body {
     margin: 0;
     background: radial-gradient(circle at center, #240000 0%, #070000 70%);
     color: white;
     font-family: Helvetica Neue, sans-serif;
-}
-
-/* Fade in page */
-body {
     opacity: 0;
     transform: translateY(10px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -22,29 +21,34 @@ body.page-loaded {
     padding: 20px 10px;
 }
 
-/* VIDEO CARD */
+/* =========================
+   VIDEO CARD
+========================= */
 .video-card {
-    background: rgba(40,0,0,0.55);
+    background: rgba(40, 0, 0, 0.55);
     padding: 16px;
     border-radius: 16px;
-    box-shadow: 0 0 35px rgba(255,0,0,0.45);
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.45);
     margin-bottom: 25px;
 }
 .video-frame video {
     width: 100%;
     border-radius: 12px;
-    box-shadow: 0 0 20px rgba(255,0,0,0.35);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.35);
 }
 
-/* CONTENT */
-.profile { text-align: center; }
+/* =========================
+   CONTENT
+========================= */
+.profile {
+    text-align: center;
+}
 .title {
     font-size: 42px;
     font-weight: 900;
     margin-bottom: 10px;
     text-shadow: 0 0 22px red;
 }
-
 .bio {
     max-width: 420px;
     margin: 0 auto 25px;
@@ -52,14 +56,20 @@ body.page-loaded {
     font-size: 18px;
 }
 
-/* Flame glow text */
-.flame { animation: flame 2s infinite alternate; }
+/* =========================
+   FLAME GLOW TEXT
+========================= */
+.flame {
+    animation: flame 2s infinite alternate;
+}
 @keyframes flame {
     0% { text-shadow: 0 0 8px red; }
     100% { text-shadow: 0 0 20px #ff1a1a; }
 }
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
 .btn {
     display: block;
     width: 240px;
@@ -71,38 +81,53 @@ body.page-loaded {
     font-size: 18px;
     font-weight: 600;
     border-radius: 14px;
-    box-shadow: 0 0 22px rgba(255,0,0,0.6);
+    box-shadow: 0 0 22px rgba(255, 0, 0, 0.6);
     transition: 0.25s ease;
 }
 .btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 32px rgba(255,0,0,1);
+    box-shadow: 0 0 32px rgba(255, 0, 0, 1);
 }
 
-/* Glow follow effect */
-.glow-follow { position: relative; overflow: hidden; }
+/* =========================
+   GLOW FOLLOW EFFECT
+========================= */
+.glow-follow {
+    position: relative;
+    overflow: hidden;
+}
 .glow-follow::after {
     content: '';
     position: absolute;
     top: var(--y);
     left: var(--x);
-    width: 0; height: 0;
-    transform: translate(-50%,-50%);
-    background: rgba(255,80,80,0.35);
+    width: 0;
+    height: 0;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 80, 80, 0.35);
     border-radius: 50%;
     pointer-events: none;
-    transition: .2s;
+    transition: 0.2s;
 }
-.glow-follow:hover::after { width: 140px; height: 140px; }
+.glow-follow:hover::after {
+    width: 140px;
+    height: 140px;
+}
 
-/* BACKGROUND ANIMATION */
-.bg-parallax{
-    position:fixed;top:0;left:0;width:100%;height:100%;
-    background:radial-gradient(circle at center,#1a0000 0%,#060000 80%);
-    z-index:-2;
-    animation:par 18s infinite alternate ease;
+/* =========================
+   BACKGROUND ANIMATION
+========================= */
+.bg-parallax {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #1a0000 0%, #060000 80%);
+    z-index: -2;
+    animation: par 18s infinite alternate ease;
 }
 @keyframes par {
-    0% { background-position:center; }
-    100% { background-position:60% 40%; }
+    0% { background-position: center; }
+    100% { background-position: 60% 40%; }
 }
