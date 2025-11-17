@@ -53,6 +53,7 @@ body.page-loaded {
     max-width: 450px;
     margin: 0 auto;
     padding: 20px 10px;
+    padding-top: 0 !important;
 }
 
 /* =========================
