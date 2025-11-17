@@ -16,15 +16,14 @@
                 <video 
                     id="bgVideo"
                     autoplay
-                    loop
-                    muted
                     playsinline
                     webkit-playsinline
+                    muted
+                    loop
                     preload="auto"
                     style="display:block; width:100%;"
                 >
-                    <source src="Hemsida_klipp_baseline_ready.mp4" type="video/mp4">
-                    <!-- <source src="Hemsida_klipp.webm" type="video/webm"> -->
+                    <source src="video1.mp4" type="video/mp4">
                 </video>
             </div>
         </div>
@@ -41,7 +40,7 @@
         </div>
     </div>
 
-    <!-- Stabil autoplay för mobil -->
+    <!-- MAX-FORCE AUTOPLAY FÖR MOBIL -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const v = document.getElementById("bgVideo");
@@ -50,9 +49,18 @@
             v.muted = true;
             v.playsInline = true;
 
+            const forcePlay = () => v.play().catch(()=>{});
+
+            // Direkt autoplay + flera försök
+            forcePlay();
+            setTimeout(forcePlay, 300);
+            setTimeout(forcePlay, 800);
+            setTimeout(forcePlay, 1500);
+
+            // Om iPhone ändå blockar – trigga efter första touch
             v.play().catch(() => {
                 const oneTouch = () => {
-                    v.play().catch(()=>{});
+                    forcePlay();
                     window.removeEventListener('touchstart', oneTouch);
                     window.removeEventListener('click', oneTouch);
                 };
