@@ -1,3 +1,9 @@
+@supports (-webkit-touch-callout: none) {
+    html, body {
+        height: 100vh !important;
+        min-height: 100vh !important;
+    }
+}
 /* ===== iPhone fullscreen fix ===== */
 html, body {
     margin: 0;
