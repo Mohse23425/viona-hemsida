@@ -13,38 +13,41 @@ document.querySelectorAll(".glow-follow").forEach(btn => {
     });
 });
 
-// Autoplay fix för iPhone
+// Stabil autoplay fix för iPhone
 document.addEventListener("DOMContentLoaded", () => {
-    const vid = document.querySelector("video");
+    const vid = document.getElementById("bgVideo"); 
     if (!vid) return;
 
     vid.muted = true;
+    vid.setAttribute("playsinline", "");
+    vid.setAttribute("webkit-playsinline", "");
 
-    let attempts = 0;
+    let tries = 0;
 
-    const tryPlay = () => {
-        vid.play().then(() => {
-            console.log("🎉 Video autoplay fungerar!");
-        }).catch(() => {
-            attempts++;
-            console.log("Autoplay blockerat (försök " + attempts + ")");
-
-            // Prova igen automatiskt
-            if (attempts < 10) {
-                setTimeout(tryPlay, 600);
-            }
-        });
+    const attemptPlay = () => {
+        const playPromise = vid.play();
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log("🎉 Autoplay fungerar!");
+                })
+                .catch(() => {
+                    tries++;
+                    console.log("Blockerat (försök " + tries + ")");
+                    if (tries < 15) setTimeout(attemptPlay, 500);
+                });
+        }
     };
 
-    tryPlay(); // kör direkt
+    attemptPlay();
 
-    // Starta så fort användaren klickar eller scrollar
     const unlock = () => {
-        tryPlay();
+        vid.muted = true;
+        attemptPlay();
+        window.removeEventListener("touchstart", unlock);
         window.removeEventListener("click", unlock);
-        window.removeEventListener("scroll", unlock);
     };
 
+    window.addEventListener("touchstart", unlock, { passive: true });
     window.addEventListener("click", unlock);
-    window.addEventListener("scroll", unlock);
 });
