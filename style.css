@@ -4,18 +4,6 @@
         min-height: 100vh !important;
     }
 }
-
-/* EXTRA SAFARI IN-VIEW FIX (läggs direkt efter första blocket) */
-@supports (-webkit-touch-callout: none) {
-    body {
-        padding-top: env(safe-area-inset-top, 0);
-        margin-top: 0 !important;
-    }
-    .video-card {
-        margin-top: 0 !important;
-    }
-}
-
 /* ===== iPhone fullscreen fix ===== */
 html, body {
     margin: 0;
@@ -107,9 +95,6 @@ body.page-loaded {
     margin: 0 auto 25px;
     line-height: 1.55;
     font-size: 18px;
-
-    /* LÄGGD TILL: Mjuk röd glow */
-    text-shadow: 0 0 6px rgba(255, 0, 0, 0.45);
 }
 
 /* =========================
